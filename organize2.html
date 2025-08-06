@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Organize Step 2 - SCENE EVENTIFY</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+<style>
+  body {
+    margin: 0;
+    background: url('bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+    color: #e3e3e3;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .header {
+    background-color: #1a1a1a;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: white;
+    user-select: none;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .icons {
+    display: flex;
+    gap: 20px;
+  }
+  .icon {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    fill: #e3e3e3;
+  }
+  .content {
+    max-width: 700px;
+    margin: 50px auto;
+    background: rgba(26, 26, 26, 0.85);
+    border-radius: 20px;
+    padding: 40px 50px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .content::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, #4a90e255, transparent 70%);
+    animation: pulseGlow 6s ease-in-out infinite;
+    z-index: 0;
+    border-radius: 50%;
+  }
+  @keyframes pulseGlow {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.8;
+    }
+  }
+  .content > * {
+    position: relative;
+    z-index: 1;
+  }
+  .content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #4a90e2;
+    text-shadow:
+      0 0 8px #4a90e2aa,
+      0 0 15px #4a90e2cc;
+    letter-spacing: 2px;
+  }
+  .content p {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    color: #c0d6f9;
+    text-shadow: 0 0 5px #4a90e2aa;
+  }
+  .event-concepts-button {
+    background-color: #4a90e2;
+    color: white;
+    font-weight: 700;
+    font-size: 1.8rem;
+    padding: 15px 50px;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.7);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .event-concepts-button:hover {
+    background-color: #357ABD;
+    box-shadow: 0 8px 20px rgba(53, 122, 189, 0.9);
+  }
+  @media (max-width: 768px) {
+    .content {
+      padding: 30px 25px;
+      max-width: 90%;
+    }
+    .content h2 {
+      font-size: 2.5rem;
+    }
+    .event-concepts-button {
+      font-size: 1.4rem;
+      padding: 12px 40px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">SCENE EVENTIFY</div>
+    <div class="icons">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3"><path d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160Zm320-300Zm0 420q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-280h320v-280q0-66-47-113t-113-47q-66 0-113 47t-47 113v280Z"/></svg>
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3"><path d="M80-680v-200h200v80H160v120H80Zm0 600v-200h80v120h120v80H80Zm600 0v-80h120v-120h80v200H680Zm120-600v-120H680v-80h200v200h-80ZM200-120q-33 0-56.5-23.5T120-200v-120h80v120h120v80H200Zm560 0v-80h120v120H680v-80h80ZM120-680v-200h200v80H160v120h-80Zm640 0v-120H680v-80h200v200h-80ZM480-480Z"/></svg>
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Z"/></svg>
+    </div>
+  </div>
+  <div class="content">
+    <h2>Plan Your Event</h2>
+    <p>Take the next step in organizing your perfect event with our easy-to-use tools.</p>
+<button class="event-concepts-button" onclick="window.location.href='concepts.html'">Event Concepts</button>
+  </div>
+</body>
+</html>

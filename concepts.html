@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Concepts - SCENE EVENTIFY</title>
+<style>
+  body {
+    margin: 0;
+    background: url('bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+    color: #e3e3e3; /* same as scene eventify text */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .header {
+    background-color: #1a1a1a;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #e3e3e3;
+    user-select: none;
+    text-transform: uppercase;
+  }
+  .subheading {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 30px auto 10px auto;
+    color: #e3e3e3;
+    text-align: center;
+  }
+  hr {
+    width: 80%;
+    border: 1px solid #e3e3e3;
+    margin: 0 auto 30px auto;
+  }
+  .caption-box {
+    max-width: 700px;
+    margin: 0 auto 30px auto;
+    background: rgba(74, 144, 226, 0.85);
+    border-radius: 20px;
+    padding: 30px 40px;
+    box-shadow:
+      0 0 15px #4a90e2cc,
+      0 0 30px #4a90e2aa;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: white;
+    user-select: none;
+  }
+  .eventify-button {
+    display: block;
+    margin: 20px auto 0 auto;
+    background-color: #4a90e2;
+    color: white;
+    font-weight: 700;
+    font-size: 1.6rem;
+    padding: 12px 40px;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.7);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .eventify-button:hover {
+    background-color: #357ABD;
+    box-shadow: 0 8px 20px rgba(53, 122, 189, 0.9);
+  }
+  .form-container {
+    max-width: 700px;
+    margin: 0 auto 50px auto;
+    background: rgba(26, 26, 26, 0.85);
+    border-radius: 20px;
+    padding: 30px 40px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    display: none;
+    flex-direction: column;
+    color: #e3e3e3;
+  }
+  .form-group {
+    margin-bottom: 20px;
+  }
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="tel"],
+  select,
+  textarea,
+  input[type="date"],
+  input[type="time"] {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #4a90e2;
+    background: #1a1a1a;
+    color: #e3e3e3;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  .radio-group {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .radio-group label {
+    font-weight: normal;
+    cursor: pointer;
+  }
+  .conditional-field {
+    margin-top: 10px;
+  }
+  .request-button {
+    background-color: #4a90e2;
+    color: white;
+    font-weight: 700;
+    font-size: 1.6rem;
+    padding: 12px 40px;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.7);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 20px;
+  }
+  .request-button:hover {
+    background-color: #357ABD;
+    box-shadow: 0 8px 20px rgba(53, 122, 189, 0.9);
+  }
+</style>
+</head>
+<body>
+  <div class="header">SCENE EVENTIFY</div>
+  <h2 class="subheading">Concepts</h2>
+  <hr />
+  <div class="caption-box">
+    Explore innovative event ideas and concepts to make your event unforgettable!
+    <button class="eventify-button" id="showFormBtn">Eventify Here</button>
+  </div>
+  <div class="form-container" id="idealogerFormContainer">
+    <form id="idealogerForm">
+      <fieldset>
+        <legend>Personal Details</legend>
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" required />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" required />
+        </div>
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" id="age" name="age" min="1" max="120" required />
+        </div>
+        <div class="form-group">
+          <label>Gender</label>
+          <div class="radio-group" id="genderGroup">
+            <label><input type="radio" name="gender" value="Male" required /> Male</label>
+            <label><input type="radio" name="gender" value="Female" /> Female</label>
+            <label><input type="radio" name="gender" value="Other" /> Other</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number</label>
+          <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}" placeholder="10-digit number" required />
+        </div>
+        <div class="form-group">
+          <label for="emailId">Email ID</label>
+          <input type="email" id="emailId" name="emailId" required />
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>ID Proof</legend>
+        <div class="form-group">
+          <label for="idProof">Select ID Proof</label>
+          <select id="idProof" name="idProof" required>
+            <option value="" disabled selected>Select an option</option>
+            <option value="Aadhar">Aadhar</option>
+            <option value="PAN">PAN</option>
+            <option value="Voter ID">Voter ID</option>
+          </select>
+        </div>
+        <div class="form-group" id="idNumberContainer" style="display:none;">
+          <label for="idNumber" id="idNumberLabel"></label>
+          <input type="text" id="idNumber" name="idNumber" />
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Event Details</legend>
+        <div class="form-group">
+          <label for="genre">Genre</label>
+          <select id="genre" name="genre" required>
+            <option value="" disabled selected>Select genre</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Amusement">Amusement</option>
+            <option value="Arts and Crafts">Arts and Crafts</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Dance">Dance</option>
+            <option value="Education">Education</option>
+            <option value="Environment">Environment</option>
+            <option value="Gaming">Gaming</option>
+            <option value="Music">Music</option>
+            <option value="Open Mic">Open Mic</option>
+            <option value="Party">Party</option>
+            <option value="Plays">Plays</option>
+            <option value="Sports">Sports</option>
+            <option value="Workshops">Workshops</option>
+            <option value="Yoga">Yoga</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="summary">Summary of the Event</label>
+          <textarea id="summary" name="summary" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Organizer</label>
+          <div class="radio-group" id="organizerGroup">
+            <label><input type="radio" name="organizer" value="Self" required /> Self</label>
+            <label><input type="radio" name="organizer" value="Required" /> Required</label>
+            <label><input type="radio" name="organizer" value="None" /> None</label>
+          </div>
+        </div>
+        <div id="organizerSelfFields" style="display:none; margin-left: 20px;">
+          <div class="form-group">
+            <label for="licenseNumber">License Number</label>
+            <input type="text" id="licenseNumber" name="licenseNumber" />
+          </div>
+          <div class="form-group">
+            <label for="budget">Budget</label>
+            <input type="number" id="budget" name="budget" min="0" />
+          </div>
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" />
+          </div>
+          <div class="form-group">
+            <label for="crowdCapability">Crowd Capability</label>
+            <input type="number" id="crowdCapability" name="crowdCapability" min="0" />
+          </div>
+          <div class="form-group">
+            <label>Celeb Guest</label>
+            <div class="radio-group" id="celebGuestGroup">
+              <label><input type="radio" name="celebGuest" value="Yes" /> Yes</label>
+              <label><input type="radio" name="celebGuest" value="No" /> No</label>
+            </div>
+          </div>
+          <div class="form-group" id="celebNameContainer" style="display:none; margin-left: 20px;">
+            <label for="celebName">Celebrity Guest Name</label>
+            <input type="text" id="celebName" name="celebName" />
+          </div>
+        </div>
+        <div id="organizerRequiredFields" style="display:none; margin-left: 20px;">
+          <div class="form-group">
+            <label for="eventDate">Event Date</label>
+            <input type="date" id="eventDate" name="eventDate" />
+          </div>
+          <div class="form-group">
+            <label for="eventTime">Event Time</label>
+            <input type="time" id="eventTime" name="eventTime" />
+          </div>
+          <div class="form-group">
+            <label for="desiredLocation">Desired Location/Area</label>
+            <input type="text" id="desiredLocation" name="desiredLocation" />
+          </div>
+        </div>
+      </fieldset>
+      <button type="submit" class="request-button">Request</button>
+    </form>
+  </div>
+
+<script>
+  const showFormBtn = document.getElementById('showFormBtn');
+  const formContainer = document.getElementById('idealogerFormContainer');
+  const idProofSelect = document.getElementById('idProof');
+  const idNumberContainer = document.getElementById('idNumberContainer');
+  const idNumberLabel = document.getElementById('idNumberLabel');
+  const idNumberInput = document.getElementById('idNumber');
+  const organizerGroup = document.getElementById('organizerGroup');
+  const organizerSelfFields = document.getElementById('organizerSelfFields');
+  const organizerRequiredFields = document.getElementById('organizerRequiredFields');
+  const celebGuestGroup = document.getElementById('celebGuestGroup');
+  const celebNameContainer = document.getElementById('celebNameContainer');
+
+  showFormBtn.addEventListener('click', () => {
+    formContainer.style.display = 'flex';
+    showFormBtn.style.display = 'none';
+    window.scrollTo({ top: formContainer.offsetTop, behavior: 'smooth' });
+  });
+
+  idProofSelect.addEventListener('change', () => {
+    const selected = idProofSelect.value;
+    if (selected) {
+      idNumberLabel.textContent = selected + ' Number';
+      idNumberInput.value = '';
+      idNumberInput.required = true;
+      idNumberContainer.style.display = 'block';
+    } else {
+      idNumberContainer.style.display = 'none';
+      idNumberInput.required = false;
+    }
+  });
+
+  organizerGroup.addEventListener('change', (e) => {
+    const value = e.target.value;
+    if (value === 'Self') {
+      organizerSelfFields.style.display = 'block';
+      organizerRequiredFields.style.display = 'none';
+    } else if (value === 'Required') {
+      organizerSelfFields.style.display = 'none';
+      organizerRequiredFields.style.display = 'block';
+    } else {
+      organizerSelfFields.style.display = 'none';
+      organizerRequiredFields.style.display = 'none';
+    }
+  });
+
+  celebGuestGroup.addEventListener('change', (e) => {
+    if (e.target.value === 'Yes') {
+      celebNameContainer.style.display = 'block';
+      document.getElementById('celebName').required = true;
+    } else {
+      celebNameContainer.style.display = 'none';
+      document.getElementById('celebName').required = false;
+    }
+  });
+
+  document.getElementById('idealogerForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+
+    // Retrieve existing requests from localStorage
+    let requests = JSON.parse(localStorage.getItem('idealogerRequests')) || [];
+    requests.push(data);
+    localStorage.setItem('idealogerRequests', JSON.stringify(requests));
+
+    alert('Request submitted successfully!');
+    e.target.reset();
+    formContainer.style.display = 'none';
+    showFormBtn.style.display = 'block';
+  });
+</script>
+</body>
+</html>

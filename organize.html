@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Organize - SCENE EVENTIFY</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+<style>
+  /* Reset and base */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: url('bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+    color: #e3e3e3;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .header {
+    background-color: #1a1a1a; /* same as home.html header */
+    padding: 20px;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: white;
+    user-select: none;
+    text-transform: uppercase;
+  }
+  .subheading {
+    margin: 30px auto 15px auto;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #a0a0a0;
+    text-align: center;
+    font-style: italic;
+    letter-spacing: 1.5px;
+    max-width: 600px;
+    user-select: none;
+  }
+  .elevated-section {
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    max-width: 700px;
+    margin: 40px auto 60px auto;
+    border-radius: 20px;
+    padding: 40px 50px;
+    box-shadow:
+      0 8px 20px rgba(0, 0, 0, 0.7),
+      inset 0 0 30px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    border: 2px solid #4a90e2; /* Decent blue color */
+  }
+  .elevated-section::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, #4a90e255, transparent 70%);
+    animation: pulseGlow 6s ease-in-out infinite;
+    z-index: 0;
+    border-radius: 50%;
+  }
+  @keyframes pulseGlow {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.8;
+    }
+  }
+  .elevated-section > * {
+    position: relative;
+    z-index: 1;
+  }
+  .elevated-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #4374adc1;
+    text-shadow:
+      0 0 8px #4a90e2aa,
+      0 0 15px #4a90e2cc;
+    letter-spacing: 2px;
+  }
+  .elevated-section p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #c0d6f9;
+    text-shadow: 0 0 5px #4a90e2aa;
+  }
+  .decorative-icons {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 35px;
+  }
+  .decorative-icons svg {
+    width: 45px;
+    height: 45px;
+    fill: #4a90e2;
+    filter: drop-shadow(0 0 5px #4a90e2cc);
+    transition: transform 0.3s ease;
+    cursor: default;
+  }
+  .decorative-icons svg:hover {
+    transform: scale(1.15) rotate(15deg);
+    filter: drop-shadow(0 0 10px #6aa0ff);
+  }
+  .lets-go-button {
+    display: block;
+    margin: 0 auto;
+    background-color: #4a90e2;
+    color: white;
+    font-weight: 700;
+    font-size: 1.8rem;
+    padding: 15px 50px;
+    border: none;
+    border-radius: 30px;
+    box-shadow:
+      0 5px 15px rgba(74, 144, 226, 0.7);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .lets-go-button:hover {
+    background-color: #357ABD;
+    box-shadow:
+      0 8px 20px rgba(53, 122, 189, 0.9);
+  }
+  @media (max-width: 768px) {
+    .elevated-section {
+      padding: 30px 25px;
+      max-width: 90%;
+    }
+    .elevated-section h2 {
+      font-size: 2.5rem;
+    }
+    .lets-go-button {
+      font-size: 1.4rem;
+      padding: 12px 40px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="header">SCENE EVENTIFY</div>
+  <div class="subheading">Your Event, Your Way</div>
+  <section class="elevated-section" aria-label="Organize your perfect event">
+    <h2>Organize Your Perfect Event</h2>
+    <p>Plan, manage, and bring your vision to life with ease and style.</p>
+    <div class="decorative-icons" aria-label="Decorative icons">
+      <!-- Star icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img">
+        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+      </svg>
+      <!-- Music note icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img">
+        <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/>
+      </svg>
+      <!-- Calendar icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img">
+        <path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 14H5V9h14z"/>
+      </svg>
+    </div>
+<button class="lets-go-button" onclick="window.location.href='organize2.html'">Let's Go</button>
+  </section>
+</body>
+</html>

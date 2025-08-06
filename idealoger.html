@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Idealogers - SCENE EVENTIFY</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #e3e3e3;
+    min-height: 100vh;
+    background: url('bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .header {
+    width: 100%;
+    background-color: rgba(26, 26, 26, 0.85);
+    padding: 20px;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    user-select: none;
+    text-transform: uppercase;
+    text-align: center;
+    box-shadow: 0 0 15px #4a90e2cc;
+  }
+  .subheading {
+    margin: 30px 0 20px 0;
+    font-size: 2rem;
+    color: #4a90e2;
+    text-shadow: 0 0 15px #4a90e2cc;
+    font-weight: 600;
+    user-select: none;
+  }
+  #requestsContainer {
+    max-width: 700px;
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow:
+      0 8px 20px rgba(74, 144, 226, 0.7),
+      inset 0 0 30px rgba(74, 144, 226, 0.3);
+    color: #e3e3e3;
+  }
+  .request-item {
+    border-bottom: 1px solid #4a90e2;
+    padding: 15px 0;
+  }
+  .request-item:last-child {
+    border-bottom: none;
+  }
+  .request-item p {
+    margin: 5px 0;
+  }
+  .connect-button {
+    margin-top: 10px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    user-select: none;
+  }
+  .connect-button:hover {
+    background-color: #357ABD;
+  }
+</style>
+</head>
+<body>
+  <div class="header">SCENE EVENTIFY</div>
+  <div class="subheading">Idealogers</div>
+  <div id="requestsContainer">
+    <p id="noRequestsMessage">No requests submitted yet.</p>
+  </div>
+
+  <script>
+    function loadRequests() {
+      const container = document.getElementById('requestsContainer');
+      const noRequestsMsg = document.getElementById('noRequestsMessage');
+      const requests = JSON.parse(localStorage.getItem('idealogerRequests')) || [];
+
+      if (requests.length === 0) {
+        noRequestsMsg.style.display = 'block';
+        return;
+      } else {
+        noRequestsMsg.style.display = 'none';
+      }
+
+      container.innerHTML = '';
+      requests.forEach((req) => {
+        const requestDiv = document.createElement('div');
+        requestDiv.className = 'request-item';
+
+        const name = document.createElement('p');
+        name.innerHTML = `<strong>Name:</strong> ${req.firstName} ${req.lastName}`;
+        requestDiv.appendChild(name);
+
+        const genre = document.createElement('p');
+        genre.innerHTML = `<strong>Genre:</strong> ${req.genre}`;
+        requestDiv.appendChild(genre);
+
+        const summary = document.createElement('p');
+        summary.innerHTML = `<strong>Summary:</strong> ${req.summary}`;
+        requestDiv.appendChild(summary);
+
+        const contact = document.createElement('p');
+        const phone = req.phoneNumber ? req.phoneNumber : '';
+        const email = req.emailId ? req.emailId : '';
+        contact.innerHTML = `<strong>Contact:</strong> ${phone}${phone && email ? ' | ' : ''}${email}`;
+        requestDiv.appendChild(contact);
+
+        const connectBtn = document.createElement('button');
+        connectBtn.className = 'connect-button';
+        connectBtn.textContent = 'Connect';
+        connectBtn.onclick = () => {
+          window.open('chat.html', '_blank');
+        };
+        requestDiv.appendChild(connectBtn);
+
+        container.appendChild(requestDiv);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadRequests);
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCENE EVENTIFY</title>
+    <title>SIGNIN</title>
+</head>
+
+<body>
+    <div class="wrapper">
+    <H1>SCENE EVENTIFY</H1>
+    <h5>SIGNIN</h5>
+    <br>
+    <p><b><i>Please enter your email to login if it's your first time ,we'll help you register</i></b></p>
+    <br>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <div id="g_id_onload"
+        data-client_id="YOUR_GOOGLE_CLIENT_ID"
+        data-login_uri="https://your.domain/your_login_endpoint"
+        data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin"
+        data-type="standard"
+        data-size="large"
+        data-theme="outline"
+        data-text="sign_in_with"
+        data-shape="rectangular"
+        data-logo_alignment="left">
+    </div>
+    <hr width="100%" size="3">
+   <p><i>Or continue with your email</i></p>
+    <hr width="100%"size="3">
+    <div >
+        <input type="email" id="email" name="email" placeholder="Email" required>
+        <button type="submit">Next</button>
+    </div>
+    </div>
+</body>
+</html>

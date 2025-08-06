@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education Events | SCENE EVENTIFY</title>
+    <link rel="stylesheet" href="signin.css">
+    <style>
+        /* Same consistent styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #e3e3e3;
+            margin: 0;
+            padding: 0;
+            overflow-y: auto;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: calc(100vh - 100px);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #1a1a1a;
+            color: white;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .section-heading {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .event-item {
+            background-color: #2a2a2a;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .event-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .event-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .event-details {
+            padding: 15px;
+        }
+
+        .event-title {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .event-date {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .event-description {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #ccc;
+        }
+
+        .event-price {
+            font-weight: bold;
+            color: #e3e3e3;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .search-icon, .notification-icon {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        
+        .search-icon:hover, .notification-icon:hover {
+            opacity: 0.8;
+        }
+        
+        .search-bar {
+            display: none;
+            width: 200px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: none;
+            background: #333;
+            color: white;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">SCENE EVENTIFY</div>
+        <div class="header-icons">
+            <svg class="search-icon" viewBox="0 0 24 24" width="24" height="24" fill="#e3e3e3">
+                <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+            <input type="text" class="search-bar" placeholder="Search education events...">
+            <svg class="notification-icon" viewBox="0 0 24 24" width="24" height="24" fill="#e3e3e3">
+                <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+            </svg>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="section-heading">Education Events</h2>
+        <div class="events-grid">
+            <div class="event-item">
+                <img src="education.jpg" alt="Coding Workshop" class="event-image">
+                <div class="event-details">
+                    <h3 class="event-title">Coding Workshop</h3>
+                    <p class="event-date">July 7, 2023 | 10:00 AM</p>
+                    <p class="event-description">Learn programming fundamentals in this hands-on workshop.</p>
+                    <p class="event-price">₹1500</p>
+                </div>
+            </div>
+
+            <div class="event-item">
+                <img src="education.jpg" alt="Science Fair" class="event-image">
+                <div class="event-details">
+                    <h3 class="event-title">Science Fair</h3>
+                    <p class="event-date">July 14, 2023 | 9:00 AM</p>
+                    <p class="event-description">Explore innovative science projects from local students.</p>
+                    <p class="event-price">Free</p>
+                </div>
+            </div>
+
+            <div class="event-item">
+                <img src="education.jpg" alt="Language Learning" class="event-image">
+                <div class="event-details">
+                    <h3 class="event-title">Language Learning</h3>
+                    <p class="event-date">July 21, 2023 | 4:00 PM</p>
+                    <p class="event-description">Interactive session for learning new languages.</p>
+                    <p class="event-price">₹800</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.search-icon').addEventListener('click', function() {
+            const searchBar = document.querySelector('.search-bar');
+            searchBar.style.display = searchBar.style.display === 'none' ? 'block' : 'none';
+            if (searchBar.style.display === 'block') {
+                searchBar.focus();
+            }
+        });
+    </script>
+</body>
+</html>

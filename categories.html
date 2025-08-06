@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Categories | SCENE EVENTIFY</title>
+    <link rel="stylesheet" href="signin.css">
+    <style>
+        /* Base styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #e3e3e3;
+            margin: 0;
+            padding: 0;
+            overflow-y: auto;/*scroll bar*/
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: calc(100vh - 100px);/*scrol bar*/
+        }
+
+        /* Header styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #1a1a1a;
+            color: white;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Divider line */
+        .divider-line {
+            border-top: 1px solid #e3e3e3;
+            margin: 20px 0;
+        }
+
+        /* Categories section */
+        .section-heading {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #444;
+            transition: all 0.3s ease;
+        }
+
+        .category-item:hover .category-image {
+            transform: scale(1.1);
+            border-color: #e3e3e3;
+        }
+
+        .category-name {
+            margin-top: 10px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        /* Explore more section */
+        .explore-toggle {
+            background: none;
+            border: none;
+            color: #e3e3e3;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .explore-more {
+            display: none;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .explore-more.active {
+            display: grid;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">SCENE EVENTIFY</div>
+        <div class="header-icons">
+            <svg class="search-icon" viewBox="0 0 24 24" width="24" height="24" fill="#e3e3e3">
+                <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+            <input type="text" class="search-bar" placeholder="Search categories...">
+            <svg class="notification-icon" viewBox="0 0 24 24" width="24" height="24" fill="#e3e3e3">
+                <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+            </svg>
+        </div>
+    </div>
+
+    <style>
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .search-icon, .notification-icon {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        
+        .search-icon:hover, .notification-icon:hover {
+            opacity: 0.8;
+        }
+        
+        .search-bar {
+            display: none;
+            width: 200px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: none;
+            background: #333;
+            color: white;
+            margin-right: 10px;
+        }
+    </style>
+
+    <script>
+        document.querySelector('.search-icon').addEventListener('click', function() {
+            const searchBar = document.querySelector('.search-bar');
+            searchBar.style.display = searchBar.style.display === 'none' ? 'block' : 'none';
+            if (searchBar.style.display === 'block') {
+                searchBar.focus();
+            }
+        });
+    </script>
+
+    <div class="container">
+        <!-- Categories Section -->
+        <h2 class="section-heading">Categories</h2>
+        <div class="categories-grid">
+            <!-- Row 1 -->
+            <div class="category-item" onclick="window.location.href='comedy.html'">
+                <img src="comedy.jpg" alt="Comedy" class="category-image">
+                <span class="category-name">Comedy</span>
+            </div>
+            <div class="category-item" onclick="window.location.href='amusement.html'">
+                <img src="apark.jpg" alt="Amusement Parks" class="category-image">
+                <span class="category-name">Amusement Parks</span>
+            </div>
+            <div class="category-item" onclick="window.location.href='plays.html'">
+                <img src="plays.jpeg" alt="Plays" class="category-image">
+                <span class="category-name">Plays</span>
+            </div>
+            <div class="category-item" onclick="window.location.href='music.html'">
+                <img src="musicshow.jpg" alt="Music Shows" class="category-image">
+                <span class="category-name">Music Shows</span>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="category-item" onclick="window.location.href='workshops.html'">
+                <img src="workshp.jpg" alt="Work Shops" class="category-image">
+                <span class="category-name">Work Shops</span>
+            </div>
+            <div class="category-item" onclick="window.location.href='openmic.html'">
+                <img src="mic.jpg" alt="Open Mic" class="category-image">
+                <span class="category-name">Open Mic</span>
+            </div>
+            <div class="category-item" onclick="window.location.href='adventure.html'">
+                <img src="advnt.jpg" alt="Adventure" class="category-image">
+                <span class="category-name">Adventure</span>
+            </div>
+            <div class="category-item" onclick="window.location.href='yoga.html'">
+                <img src="yoga.jpg" alt="Yoga" class="category-image">
+                <span class="category-name">Yoga</span>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="category-item" onclick="window.location.href='arts.html'">
+                <img src="arts.jpg" alt="Arts and Crafts" class="category-image">
+                <span class="category-name">Arts and Crafts</span>
+            </div>
+            <div class="category-item" onclick="window.location.href='environment.html'">
+                <img src="environmnt.jpeg" alt="Environment" class="category-image">
+                <span class="category-name">Environment</span>
+            </div>
+            <div class="category-item" onclick="window.location.href='education.html'">
+                <img src="education.jpg" alt="Education" class="category-image">
+                <span class="category-name">Education</span>
+            </div>
+            <div class="category-item" onclick="window.location.href='gaming.html'">
+                <img src="gamin.jpg" alt="Gaming" class="category-image">
+                <span class="category-name">Gaming</span>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="category-item" onclick="window.location.href='dance.html'">
+                <img src="dance.jpg" alt="Dance" class="category-image">
+                <span class="category-name">Dance</span>
+            </div>
+            <div class="category-item" onclick="window.location.href='business.html'">
+                <img src="business.jpg" alt="Business" class="category-image">
+                <span class="category-name">Business</span>
+            </div>
+            <div class="category-item" onclick="window.location.href='literature.html'">
+                <img src="litrature.jpg" alt="Literature" class="category-image">
+                <span class="category-name">Literature</span>
+            </div>
+            <div class="category-item" onclick="window.location.href='health.html'">
+                <img src="health.jpg" alt="Health Consults" class="category-image">
+                <span class="category-name">Health Consults</span>
+            </div>
+        </div>
+
+        <div class="divider-line"></div>
+
+        <!-- Explore More Section -->
+        <button class="explore-toggle" onclick="toggleExplore()">Explore More ▼</button>
+        
+        <div class="explore-more" id="exploreMore">
+            <div class="category-item" onclick="window.location.href='parties.html'">
+                <img src="party.jpg" alt="Parties" class="category-image">
+                <span class="category-name">Parties</span>
+            </div>
+            <div class="category-item" onclick="window.location.href='quizzes.html'">
+                <img src="quz.jpg" alt="Quizzes" class="category-image">
+                <span class="category-name">Quizzes</span>
+            </div>
+            <div class="category-item" onclick="window.location.href='spirituality.html'">
+                <img src="spirituality.jpg" alt="Spirituality" class="category-image">
+                <span class="category-name">Spirituality</span>
+            </div>
+            <div class="category-item" onclick="window.location.href='technology.html'">
+                <img src="tech.jpg" alt="Technology" class="category-image">
+                <span class="category-name">Technology</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleExplore() {
+            const exploreSection = document.getElementById('exploreMore');
+            const toggleButton = document.querySelector('.explore-toggle');
+            
+            exploreSection.classList.toggle('active');
+            
+            if (exploreSection.classList.contains('active')) {
+                toggleButton.textContent = 'Explore More ▲';
+            } else {
+                toggleButton.textContent = 'Explore More ▼';
+            }
+        }
+    </script>
+</body>
+</html>

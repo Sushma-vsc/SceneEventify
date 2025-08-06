@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCENE EVENTIFY</title>
+    <link rel="stylesheet" href="signin.css">
+    <style>
+        /* Additional styles for home page */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #1a1a1a;
+            color: white;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .icons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .icon {
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+        }
+        
+        .search-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-bar {
+            display: none;
+            margin-left: 10px;
+        }
+        
+        .search-bar.active {
+            display: block;
+        }
+        
+        .account-details {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 70px;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            color: black;
+        }
+        
+        .account-details.active {
+            display: block;
+        }
+        
+        .qr-scanner {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .qr-scanner.active {
+            display: flex;
+        }
+        
+        .scanner-container {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        /* New styles for live events section */
+        .live-events-section {
+            text-align: center;
+            margin: 20px 0;
+            padding: 0 20px;
+        }
+
+        .divider-line {
+            border-top: 1px solid #e3e3e3;
+            margin: 20px 0;
+        }
+
+        .live-events-heading {
+            font-size: 18px;
+            color: #e3e3e3;
+            margin-bottom: 5px;
+        }
+
+        .current-location {
+            font-size: 12px;
+            color: #a0a0a0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">SCENE EVENTIFY</div>
+        <div class="icons">
+            <div class="search-container">
+                <svg class="icon search-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+                    <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/>
+                </svg>
+                <input type="text" class="search-bar" placeholder="Search events...">
+            </div>
+            
+            <svg class="icon notification-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+                <path d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160Zm320-300Zm0 420q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-280h320v-280q0-66-47-113t-113-47q-66 0-113 47t-47 113v280Z"/>
+            </svg>
+            
+            <svg class="icon scanner-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+                <path d="M80-680v-200h200v80H160v120H80Zm0 600v-200h80v120h120v80H80Zm600 0v-80h120v-120h80v200H680Zm120-600v-120H680v-80h200v200h-80ZM200-120q-33 0-56.5-23.5T120-200v-120h80v120h120v80H200Zm560 0v-80h120v120H680v-80h80ZM120-680v-200h200v80H160v120h-80Zm640 0v-120H680v-80h200v200h-80ZM480-480Z"/>
+            </svg>
+            
+            <svg class="icon account-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+                <path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Z"/>
+            </svg>
+        </div>
+    </div>
+    
+    <!-- New live events section -->
+    <div class="live-events-section">
+        <div class="divider-line"></div>
+        <h3 class="live-events-heading">Live Events</h3>
+        <p class="current-location" id="current-location">Loading location...</p>
+    </div>
+    <div class="divider-line"></div>
+    
+    <!-- Button section -->
+    <div class="button-section">
+        <button class="nav-button" onclick="window.location.href='categories.html'">LIVE EVENTS</button>
+        <button class="nav-button" onclick="window.location.href='organize.html'">ORGANIZE</button>
+        <button class="nav-button" onclick="window.location.href='funding.html'">FUNDING</button>
+        <button class="nav-button" onclick="alert('PUBLISHING functionality would open here')">PUBLISHING</button>
+        <button class="nav-button" onclick="alert('LOCATION RENTING functionality would open here')">LOCATION RENTING</button>
+        <button class="nav-button" onclick="alert('COLLAB functionality would open here')">COLLAB</button>
+    </div>
+
+    <style>
+        /* Button section styles */
+        .button-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .nav-button {
+            background-color: #1a1a1a;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            min-width: 150px;
+            text-align: center;
+        }
+
+        .nav-button:hover {
+            background-color: #333;
+        }
+    </style>
+
+    <div class="account-details" id="accountDetails">
+        <h3>Account Details</h3>
+        <p id="account-name"></p>
+        <p id="account-email"></p>
+        <p id="account-age"></p>
+        <p id="account-gender"></p>
+        <p id="account-state"></p>
+        <button id="logout-button" style="margin-top: 20px; padding: 8px 16px; background: #ff4444; color: white; border: none; border-radius: 4px; cursor: pointer;">Logout</button>
+    </div>
+    
+    <div class="qr-scanner" id="qrScanner">
+        <div class="scanner-container">
+            <h3>QR Scanner</h3>
+            <div id="scanner-view" style="width: 300px; height: 300px; background: #eee; margin: 20px 0;"></div>
+            <button onclick="closeScanner()">Close Scanner</button>
+        </div>
+    </div>
+    
+    <script>
+        // Get current location
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    
+                    // Reverse geocoding to get location name
+                    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const locationName = data.display_name.split(',')[0];
+                            document.getElementById('current-location').textContent = locationName;
+                        })
+                        .catch(() => {
+                            document.getElementById('current-location').textContent = 
+                                `Lat: ${latitude.toFixed(4)}, Long: ${longitude.toFixed(4)}`;
+                        });
+                },
+                function(error) {
+                    document.getElementById('current-location').textContent = 'Location access denied';
+                }
+            );
+        } else {
+            document.getElementById('current-location').textContent = 'Geolocation not supported';
+        }
+
+        // Get user data from localStorage (set during login/signup)
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        
+        // Toggle search bar
+        document.querySelector('.search-icon').addEventListener('click', function() {
+            document.querySelector('.search-bar').classList.toggle('active');
+        });
+        
+        // Show account details
+        document.querySelector('.account-icon').addEventListener('click', function() {
+            if (userData) {
+                document.getElementById('account-name').textContent = `Name: ${userData.firstname} ${userData.lastname}`;
+                document.getElementById('account-email').textContent = `Email: ${userData.email}`;
+                document.getElementById('account-age').textContent = `Age: ${userData.age}`;
+                document.getElementById('account-gender').textContent = `Gender: ${userData.gender}`;
+                document.getElementById('account-state').textContent = `State: ${userData.state}`;
+            }
+            document.getElementById('accountDetails').classList.toggle('active');
+        });
+        
+        // Show QR scanner
+        document.querySelector('.scanner-icon').addEventListener('click', function() {
+            document.getElementById('qrScanner').classList.add('active');
+            // In a real implementation, you would initialize a QR scanner library here
+        });
+        
+        function closeScanner() {
+            document.getElementById('qrScanner').classList.remove('active');
+        }
+
+        // Logout functionality
+        document.getElementById('logout-button').addEventListener('click', function() {
+            localStorage.removeItem('userData');
+            window.location.href = 'login.html';
+        });
+        
+        // Close account details when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.account-icon') && !event.target.closest('.account-details')) {
+                document.getElementById('accountDetails').classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Chat - SCENE EVENTIFY</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: url('bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #e3e3e3;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  .header {
+    background-color: rgba(26, 26, 26, 0.85);
+    padding: 20px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    user-select: none;
+    color: white;
+    box-shadow: 0 0 15px #4a90e2cc;
+  }
+  .chat-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 700px;
+    margin: 20px auto;
+    background: rgba(26, 26, 26, 0.85);
+    border-radius: 15px;
+    box-shadow:
+      0 8px 20px rgba(74, 144, 226, 0.7),
+      inset 0 0 30px rgba(74, 144, 226, 0.3);
+    overflow: hidden;
+  }
+  .messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    color: #e3e3e3;
+  }
+  .input-area {
+    display: flex;
+    border-top: 1px solid #4a90e2;
+  }
+  .input-area input {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    font-size: 1rem;
+    background: #1a1a1a;
+    color: #e3e3e3;
+  }
+  .input-area button {
+    background-color: #4a90e2;
+    border: none;
+    color: white;
+    padding: 0 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  .input-area button:hover {
+    background-color: #357ABD;
+  }
+  .message {
+    margin-bottom: 15px;
+  }
+  .message.user {
+    text-align: right;
+  }
+  .message .text {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 70%;
+  }
+  .message.user .text {
+    background-color: #4a90e2;
+    color: white;
+  }
+  .message.bot .text {
+    background-color: #333;
+    color: #e3e3e3;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <div>SCENE EVENTIFY - Chat</div>
+    <div id="chatPartnerName" style="font-weight:bold; color:#4a90e2; font-size:1.2rem; user-select:none;"></div>
+  </div>
+  <div class="chat-container">
+    <div class="messages" id="messages"></div>
+    <form id="chatForm" class="input-area">
+      <input type="text" id="messageInput" placeholder="Type your message..." autocomplete="off" required />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script>
+    const messagesDiv = document.getElementById('messages');
+    const chatForm = document.getElementById('chatForm');
+    const messageInput = document.getElementById('messageInput');
+    const chatPartnerNameElem = document.getElementById('chatPartnerName');
+
+    function getChatPartnerName() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const nameParam = urlParams.get('name');
+      if (nameParam) {
+        return decodeURIComponent(nameParam);
+      }
+      return 'Selected Idealoger';
+    }
+
+    function addMessage(text, sender) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', sender);
+      const textSpan = document.createElement('span');
+      textSpan.classList.add('text');
+      textSpan.textContent = text;
+      messageDiv.appendChild(textSpan);
+      messagesDiv.appendChild(messageDiv);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const message = messageInput.value.trim();
+      if (message === '') return;
+      addMessage(message, 'user');
+      messageInput.value = '';
+
+      // Simulate bot response
+      setTimeout(() => {
+        addMessage('This is a placeholder response. Chat functionality to be implemented.', 'bot');
+      }, 1000);
+    });
+
+    // Initialize chat partner name display
+    chatPartnerNameElem.textContent = getChatPartnerName();
+  </script>
+</body>
+</html>

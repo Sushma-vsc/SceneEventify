@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Event Booking | SCENE EVENTIFY</title>
+    <link rel="stylesheet" href="signin.css" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .booking-container {
+            background-color: #1f1f1f;
+            padding: 30px 40px;
+            border-radius: 12px;
+            width: 420px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+        h2 {
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: 1.2px;
+            color: #ff6f61;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        .section h3 {
+            margin-bottom: 15px;
+            font-weight: 600;
+            border-bottom: 2px solid #ff6f61;
+            padding-bottom: 6px;
+            font-size: 1.2rem;
+        }
+        .event-details p {
+            margin: 6px 0;
+            font-size: 1rem;
+            color: #ccc;
+        }
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #ddd;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 8px 12px;
+            margin-top: 6px;
+            border-radius: 6px;
+            border: none;
+            background-color: #333;
+            color: #e0e0e0;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        .ticket-type {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            padding: 10px 12px;
+            background-color: #2a2a2a;
+            border-radius: 8px;
+        }
+        .ticket-info {
+            flex: 1;
+        }
+        .ticket-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #ff6f61;
+        }
+        .ticket-price {
+            font-size: 0.9rem;
+            color: #bbb;
+            margin-top: 4px;
+        }
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .quantity-controls button {
+            background-color: #ff6f61;
+            border: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.3s ease;
+        }
+        .quantity-controls button:disabled {
+            background-color: #a04a43;
+            cursor: not-allowed;
+        }
+        .quantity-controls input {
+            width: 40px;
+            text-align: center;
+            font-size: 1rem;
+            border-radius: 6px;
+            border: none;
+            background-color: #444;
+            color: #e0e0e0;
+            padding: 4px 0;
+        }
+        .total-cost {
+            font-weight: 700;
+            font-size: 1.3rem;
+            text-align: right;
+            margin-top: 15px;
+            color: #ff6f61;
+        }
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background-color: #2a2a2a;
+            transition: background-color 0.3s ease;
+            user-select: none;
+        }
+        .payment-method:hover {
+            background-color: #3b3b3b;
+        }
+        .payment-method input[type="radio"] {
+            cursor: pointer;
+        }
+        .payment-icon {
+            font-size: 1.8rem;
+            width: 32px;
+            text-align: center;
+            color: #ff6f61;
+        }
+        button[type="submit"] {
+            margin-top: 25px;
+            width: 100%;
+            padding: 12px;
+            background-color: #ff6f61;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #e65b4f;
+        }
+        .confirmation {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #4caf50;
+        }
+        .error-message {
+            color: #f44336;
+            font-weight: 600;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="booking-container" role="main" aria-label="Event Ticket Booking Form">
+        <h2>Book Your Event</h2>
+        <form id="bookingForm" novalidate>
+            <section class="section event-details" aria-label="Event Details">
+                <h3>Event Details</h3>
+                <p><strong>Title:</strong> <span id="eventTitle">Loading...</span></p>
+                <p><strong>Date & Time:</strong> <span id="eventDate">Loading...</span></p>
+                <p><strong>Location:</strong> <span id="eventLocation">Loading...</span></p>
+            </section>
+
+            <section class="section ticket-selection" aria-label="Ticket Selection">
+                <h3>Select Tickets</h3>
+                <div id="ticketTypesContainer" aria-live="polite" aria-relevant="additions"></div>
+                <p class="total-cost" aria-live="polite" aria-atomic="true">Total: ₹0</p>
+            </section>
+
+            <section class="section user-info" aria-label="User Information">
+                <h3>Your Information</h3>
+                <label for="userName">Full Name *</label>
+                <input type="text" id="userName" name="userName" required autocomplete="name" aria-required="true" />
+                <label for="userEmail">Email *</label>
+                <input type="email" id="userEmail" name="userEmail" required autocomplete="email" aria-required="true" />
+                <label for="userPhone">Phone Number (optional)</label>
+                <input type="tel" id="userPhone" name="userPhone" autocomplete="tel" pattern="[\d\s\-\+\(\)]{7,15}" placeholder="+91 98765 43210" />
+            </section>
+
+            <section class="section payment-selection" aria-label="Payment Method Selection">
+                <h3>Payment Method</h3>
+                <div class="payment-methods" role="radiogroup" aria-required="true" aria-labelledby="paymentMethodLabel" id="paymentMethods">
+                    <label class="payment-method" for="paymentCreditCard">
+                        <input type="radio" id="paymentCreditCard" name="paymentMethod" value="creditcard" required />
+                        <span class="payment-icon" aria-hidden="true">💳</span> Credit Card
+                    </label>
+                    <label class="payment-method" for="paymentUPI">
+                        <input type="radio" id="paymentUPI" name="paymentMethod" value="upi" />
+                        <span class="payment-icon" aria-hidden="true">📲</span> UPI
+                    </label>
+                    <label class="payment-method" for="paymentNetBanking">
+                        <input type="radio" id="paymentNetBanking" name="paymentMethod" value="netbanking" />
+                        <span class="payment-icon" aria-hidden="true">🏦</span> Net Banking
+                    </label>
+                    <label class="payment-method" for="paymentWallet">
+                        <input type="radio" id="paymentWallet" name="paymentMethod" value="wallet" />
+                        <span class="payment-icon" aria-hidden="true">👛</span> Wallet Apps
+                    </label>
+                </div>
+            </section>
+
+            <button type="submit" aria-label="Proceed to Payment">Proceed to Payment</button>
+            <div class="confirmation" id="confirmationMessage" role="alert" aria-live="assertive" style="display:none;"></div>
+            <div class="error-message" id="errorMessage" role="alert" aria-live="assertive" style="display:none;"></div>
+        </form>
+    </div>
+
+    <script>
+        // Sample event and ticket data - in real use, this would come from server or URL params
+        const eventData = {
+            title: '',
+            date: '',
+            location: '',
+            tickets: []
+        };
+
+        // Parse query params for event details and tickets JSON (encoded)
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                title: params.get('title') || '',
+                date: params.get('date') || '',
+                location: params.get('location') || '',
+                tickets: params.get('tickets') || '' // expected JSON string encoded
+            };
+        }
+
+        // Render event details
+        function renderEventDetails() {
+            document.getElementById('eventTitle').textContent = eventData.title || 'N/A';
+            document.getElementById('eventDate').textContent = eventData.date || 'N/A';
+            document.getElementById('eventLocation').textContent = eventData.location || 'N/A';
+        }
+
+        // Render ticket types with quantity controls
+        function renderTicketTypes() {
+            const container = document.getElementById('ticketTypesContainer');
+            container.innerHTML = '';
+            eventData.tickets.forEach((ticket, index) => {
+                const ticketDiv = document.createElement('div');
+                ticketDiv.className = 'ticket-type';
+                ticketDiv.setAttribute('data-index', index);
+
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'ticket-info';
+
+                const nameEl = document.createElement('div');
+                nameEl.className = 'ticket-name';
+                nameEl.textContent = ticket.name;
+
+                const priceEl = document.createElement('div');
+                priceEl.className = 'ticket-price';
+                priceEl.textContent = `₹${ticket.price}`;
+
+                infoDiv.appendChild(nameEl);
+                infoDiv.appendChild(priceEl);
+
+                const quantityControls = document.createElement('div');
+                quantityControls.className = 'quantity-controls';
+
+                const decrementBtn = document.createElement('button');
+                decrementBtn.type = 'button';
+                decrementBtn.textContent = '−';
+                decrementBtn.setAttribute('aria-label', `Decrease quantity of ${ticket.name}`);
+                decrementBtn.disabled = true;
+
+                const quantityInput = document.createElement('input');
+                quantityInput.type = 'number';
+                quantityInput.min = 0;
+                quantityInput.value = 0;
+                quantityInput.setAttribute('aria-live', 'polite');
+                quantityInput.setAttribute('aria-label', `Quantity of ${ticket.name}`);
+
+                const incrementBtn = document.createElement('button');
+                incrementBtn.type = 'button';
+                incrementBtn.textContent = '+';
+                incrementBtn.setAttribute('aria-label', `Increase quantity of ${ticket.name}`);
+
+                quantityControls.appendChild(decrementBtn);
+                quantityControls.appendChild(quantityInput);
+                quantityControls.appendChild(incrementBtn);
+
+                ticketDiv.appendChild(infoDiv);
+                ticketDiv.appendChild(quantityControls);
+
+                container.appendChild(ticketDiv);
+
+                // Event listeners for increment/decrement
+                incrementBtn.addEventListener('click', () => {
+                    quantityInput.value = parseInt(quantityInput.value) + 1;
+                    decrementBtn.disabled = false;
+                    updateTotalCost();
+                });
+                decrementBtn.addEventListener('click', () => {
+                    let currentVal = parseInt(quantityInput.value);
+                    if (currentVal > 0) {
+                        quantityInput.value = currentVal - 1;
+                        if (quantityInput.value == 0) {
+                            decrementBtn.disabled = true;
+                        }
+                        updateTotalCost();
+                    }
+                });
+                quantityInput.addEventListener('input', () => {
+                    let val = parseInt(quantityInput.value);
+                    if (isNaN(val) || val < 0) {
+                        quantityInput.value = 0;
+                        decrementBtn.disabled = true;
+                    } else {
+                        decrementBtn.disabled = val <= 0;
+                    }
+                    updateTotalCost();
+                });
+            });
+        }
+
+        // Calculate and update total cost
+        function updateTotalCost() {
+            let total = 0;
+            const container = document.getElementById('ticketTypesContainer');
+            const ticketDivs = container.querySelectorAll('.ticket-type');
+            ticketDivs.forEach(div => {
+                const index = parseInt(div.getAttribute('data-index'));
+                const quantity = parseInt(div.querySelector('input[type="number"]').value) || 0;
+                total += quantity * eventData.tickets[index].price;
+            });
+            document.querySelector('.total-cost').textContent = `Total: ₹${total}`;
+            return total;
+        }
+
+        // Validate form inputs
+        function validateForm() {
+            const form = document.getElementById('bookingForm');
+            const userName = form.userName.value.trim();
+            const userEmail = form.userEmail.value.trim();
+            const userPhone = form.userPhone.value.trim();
+            const paymentMethod = form.paymentMethod.value;
+            const totalCost = updateTotalCost();
+
+            if (!userName) {
+                showError('Please enter your full name.');
+                return false;
+            }
+            if (!userEmail || !validateEmail(userEmail)) {
+                showError('Please enter a valid email address.');
+                return false;
+            }
+            if (userPhone && !validatePhone(userPhone)) {
+                showError('Please enter a valid phone number or leave it blank.');
+                return false;
+            }
+            if (!paymentMethod) {
+                showError('Please select a payment method.');
+                return false;
+            }
+            if (totalCost <= 0) {
+                showError('Please select at least one ticket.');
+                return false;
+            }
+            clearError();
+            return true;
+        }
+
+        // Email validation regex
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email.toLowerCase());
+        }
+
+        // Phone validation regex (basic)
+        function validatePhone(phone) {
+            const re = /^[\d\s\-\+\(\)]{7,15}$/;
+            return re.test(phone);
+        }
+
+        // Show error message
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            document.getElementById('confirmationMessage').style.display = 'none';
+        }
+
+        // Clear error message
+        function clearError() {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = '';
+            errorDiv.style.display = 'none';
+        }
+
+        // Show confirmation message
+        function showConfirmation(message) {
+            const confirmDiv = document.getElementById('confirmationMessage');
+            confirmDiv.textContent = message;
+            confirmDiv.style.display = 'block';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        // Simulate secure transmission of booking data to backend
+        // In real implementation, replace with actual API call (e.g., fetch or axios)
+        function transmitBookingData(data) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve(true); // Simulate success response from backend
+                }, 1500);
+            });
+        }
+
+        // Handle payment redirection or app opening based on selected payment method
+        // Backend should handle actual payment gateway integration and provide URLs or deep links
+        function handlePayment(paymentMethod, totalAmount) {
+            switch(paymentMethod) {
+                case 'upi':
+                    // Example UPI deep link - replace with actual backend-generated link
+                    const upiUrl = `upi://pay?pa=sceneevntify@upi&pn=SceneEvntify&am=${totalAmount}&cu=INR`;
+                    window.location.href = upiUrl;
+                    break;
+                case 'wallet':
+                    // Example wallet app payment gateway URL - replace with actual backend URL
+                    window.open(`https://www.examplewallet.com/pay?amount=${totalAmount}`, '_blank');
+                    break;
+                case 'creditcard':
+                    // Example credit card payment gateway URL - replace with actual backend URL
+                    window.open(`https://www.securepay.com/creditcard?amount=${totalAmount}`, '_blank');
+                    break;
+                case 'netbanking':
+                    // Example net banking payment gateway URL - replace with actual backend URL
+                    window.open(`https://www.securepay.com/netbanking?amount=${totalAmount}`, '_blank');
+                    break;
+                default:
+                    alert('Unsupported payment method selected.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load event data from URL params or fallback defaults
+            const params = getQueryParams();
+            eventData.title = params.title || 'Sample Event';
+            eventData.date = params.date || '2024-12-31 19:00';
+            eventData.location = params.location || 'Sample Venue, City';
+            try {
+                eventData.tickets = params.tickets ? JSON.parse(decodeURIComponent(params.tickets)) : [
+                    { name: 'General Admission', price: 500 },
+                    { name: 'VIP', price: 1500 }
+                ];
+            } catch {
+                eventData.tickets = [
+                    { name: 'General Admission', price: 500 },
+                    { name: 'VIP', price: 1500 }
+                ];
+            }
+
+            renderEventDetails();
+            renderTicketTypes();
+            updateTotalCost();
+
+            const form = document.getElementById('bookingForm');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (!validateForm()) return;
+
+                const totalAmount = updateTotalCost();
+                const bookingDetails = {
+                    event: {
+                        title: eventData.title,
+                        date: eventData.date,
+                        location: eventData.location
+                    },
+                    tickets: [],
+                    user: {
+                        name: form.userName.value.trim(),
+                        email: form.userEmail.value.trim(),
+                        phone: form.userPhone.value.trim()
+                    },
+                    paymentMethod: form.paymentMethod.value,
+                    totalAmount
+                };
+
+                // Collect ticket quantities
+                const container = document.getElementById('ticketTypesContainer');
+                const ticketDivs = container.querySelectorAll('.ticket-type');
+                ticketDivs.forEach(div => {
+                    const index = parseInt(div.getAttribute('data-index'));
+                    const quantity = parseInt(div.querySelector('input[type="number"]').value) || 0;
+                    if (quantity > 0) {
+                        bookingDetails.tickets.push({
+                            name: eventData.tickets[index].name,
+                            price: eventData.tickets[index].price,
+                            quantity
+                        });
+                    }
+                });
+
+                // Simulate secure transmission to backend
+                showConfirmation('Processing your booking and payment...');
+                const success = await transmitBookingData(bookingDetails);
+
+                if (success) {
+                    showConfirmation(`Booking successful! Redirecting to payment...`);
+                    // Redirect or open payment app
+                    handlePayment(bookingDetails.paymentMethod, bookingDetails.totalAmount);
+                    form.reset();
+                    updateTotalCost();
+                } else {
+                    showError('Booking failed. Please try again.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
